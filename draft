@@ -1,0 +1,61 @@
+Format:
+Soutenance en distanciel: 7-8 minutes de présentation et 7-8 minutes de questions
+
+Support:
+Un power-point
+
+Date:
+04/01 à 13h45
+
+Réunions:
+- 28/12 à ?
+
+Résumé de l'article (informel):
+En gros quand on veut fitter des données qu'on pense issu de plusieurs distributions, on fait appel à un MoE (mixture of experts). Chaque donnée correspond
+à la somme, pondérée par des probabilités d'appartenance (gating functions), de distributions de paramètres différents (dites experts). D'habitude on utilise
+un mix de distributions gaussiennes mais ce n'est pas très robuste à la présence d'anomalies et de distributions avec des queues lourdes (heavy tails). 
+Ainsi, l'auteur introduit un nouvel MoE basé sur les t distributions. Une t distribution c'est plus ou moins la généralisation robuste d'une gaussienne et 
+c'est moins sensible à la présence d'anomalies et d'heavy tails. Pour entraîner ce TMoE, il utilise l'algorithme EM ou une version améliorée dite ECM dans
+laquelle une étape E est intercalée entre deux sous-étapes M.
+
+Plan (proposition du 27/12 par Margot, à modifier):
+
+Introduction:
+- Qu'est-ce qu'un MoE ?
+- Visualisation d'un cas qui motive la nécessité de cet outil
+- Rappel bref du NMoE
+- Application du NMoE sur ce cas => échec (visualisation)
+- Explication : présence d'anomalies et données issues de distribution à queue lourde
+- Problématique: Quel MoE pour des données comportant des anomalies ou issues de distributions à queue lourde ?
+- Annonce de plan: On présentera d'abord la solution théorique apportée par le professeur Chamroukhi puis nous illustrerons son application sur un exemple
+que nous avons approfondi.
+
+I/ Fondements théoriques
+A/ TMoE: définition, formule,
+B/ EM Algorithm: rappels (mettre pseudo-code ?), présentation des formules, sketch de convergence, ECM
+C/ Hyper-paramètres et hypothèses: choix du nombre d'experts, initialisation, quoi d'autre ?
+
+II/ Exemple: application du TMoE sur les données du changement climatique
+(Je pense qu'il faut prendre un autre exemple que celui de l'article car on voit pas vraiment l'avantage concurrentiel du TMoE par rapport au NMoE, ce serait
+peut-être pas mal de prendre un exemple de clustering aussi comme ça on étend le scope des exemples de l'article qui lui reste sur de la régression)
+A/ Présentation des données et pourquoi elles pourraient être mieux fittées par TMoE que NMoE
+B/ Résultats du TMoE
+C/ Comparaison avec le NMoE
+
+Conclusion:
+- Meilleur que NMoE sur les données avec des anomalies ou issues de distribution à queue lourde
+- Possibilité de l'utiliser pour la density estimation, non-linear regression function approximation et le clustering (à détailler)
+- autre ?
+
+Questions sur l'article:
+- (Margot) C'est quoi les hierarchical representations dont il parle ? (voir page 7) et à la fin en ouverture il met "to extend the proposed models to 
+the hierarchical MoE framework'.
+- (Margot) Page 8, je ne comprends pas bien le choix de la distribution multinomiale pour Zi|ri et qu'est-ce que ça donnerait pour un autre choix ? Idem 
+pour le choix de la fonction multinomiale logistique pour les gates probabilities.
+- (Margot) Je n'ai pas compris le paragraphe 3.3 Identifiability of the TMoE model (page 8-9).
+- (Margot) Page 11, je ne comprends pas en quoi IRLS est différent d'un algorithme de Newton classique ici ?
+- (Margot) Page 12, dérivation de la formule (31) à vérifier.
+- (Margot) Page 16, les valeurs des paramètres dans la Table 2 ont été apprises sur des données générées par quel modèle ?
+- (Margot) Page 20, sur l'absence de "confidence region" je n'ai pas compris de quoi il s'agissait.
+- (Margot) Page 27, quelle est la réalité météorologique de ce qu'ils appellent les "temperature anomalies" ?
+- (Margot) Est-ce qu'on fait le ppt en français ou en anglais ? 
