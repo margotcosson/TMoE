@@ -47,13 +47,13 @@ A/ Points positifs
 B/ Points négatifs
 - Laplace obtient à peu près les mêmes résultats (il est même meilleur dans certains cas)
 - Les cas test sont incomplets:
-    - essayer cas test 2 avec > 5% d'outliers
-    - essayer cas test 2 avec des anomalies qui sont également des random variables (≠ déterministes)
-    - le cas real 2 (données climatiques) n'est pas discriminant entre les méthodes, essayer sur un cas plus compliqué
+    - (*) essayer cas test 2 avec > 5% d'outliers
+    - (*) essayer cas test 2 avec des anomalies qui sont également des random variables (≠ déterministes)
+    - (**) le cas real 2 (données climatiques) n'est pas discriminant entre les méthodes, essayer sur un cas plus compliqué
     - il ne dit pas quelle forme il prend pour mu(x_i, beta_k), s'il s'agit de la forme linéaire, pourquoi est-ce que c'est le choix adopté?
     - aucune précision sur l'utilisation de ECM vs EM dans les cas d'usage, isoler le bénéfice de la forme de la distribution t vs le bénéfice induit par l'ECM
 
-III/ Exemple: application du TMoE sur les données du changement climatique - 2 min
+III/ Exemple: application du TMoE - 2 min
 (Je pense qu'il faut prendre un autre exemple que celui de l'article car on voit pas vraiment l'avantage concurrentiel du TMoE par rapport au NMoE, ce serait
 peut-être pas mal de prendre un exemple de clustering aussi comme ça on étend le scope des exemples de l'article qui lui reste sur de la régression)
 A/ Présentation des données et pourquoi elles pourraient être mieux fittées par TMoE que NMoE
@@ -64,6 +64,14 @@ Conclusion - 30 sec
 - Meilleur que NMoE sur les données avec des anomalies ou issues de distribution à queue lourde
 - Possibilité de l'utiliser pour la density estimation, non-linear regression function approximation et le clustering (à détailler)
 - autre ?
+
+A FAIRE:
+1. Créer ppt et faire l'intro
+2. Partie I (fondements théoriques) sous-partie A
+3. Partie I sous-partie B
+4. Creuser les points négatifs (*) sur le cas test 2
+5. Chercher un cas test discriminant sur les données climatiques (**)
+6. Trouver quel algo (EM, ECM) est utilisé sur quelle forme (NMoE, LMoE, TMoE) dans les cas test ?
 
 A CREUSER:
 - C'est quoi les hierarchical representations dont il parle ? (voir page 7) et à la fin en ouverture il met "to extend the proposed models to 
