@@ -8,7 +8,7 @@ Date:
 04/01 à 13h45
 
 Réunions:
-- 28/12 à ?
+- 28/12 à 10h ou 10h30?
 
 Résumé de l'article (informel):
 En gros quand on veut fitter des données qu'on pense issu de plusieurs distributions, on fait appel à un MoE (mixture of experts). Chaque donnée correspond
@@ -21,7 +21,7 @@ laquelle une étape E est intercalée entre deux sous-étapes M.
 Plan (proposition du 27/12 par Margot, à modifier):
 
 Introduction:
-- Qu'est-ce qu'un MoE ?
+- Qu'est-ce qu'un MoE ? 
 - Visualisation d'un cas qui motive la nécessité de cet outil
 - Rappel bref du NMoE
 - Application du NMoE sur ce cas => échec (visualisation)
@@ -31,9 +31,10 @@ Introduction:
 que nous avons approfondi.
 
 I/ Fondements théoriques
-A/ TMoE: définition, formule,
+A/ TMoE: définition, formule, Insister sur la différence entre MoE et simple mixture (basé sur 2 observations x et r)?
 B/ EM Algorithm: rappels (mettre pseudo-code ?), présentation des formules, sketch de convergence, ECM
 C/ Hyper-paramètres et hypothèses: choix du nombre d'experts, initialisation, quoi d'autre ?
+D/ (peut-etre inutile) Application sur un cas jouet (code)?
 
 II/ Exemple: application du TMoE sur les données du changement climatique
 (Je pense qu'il faut prendre un autre exemple que celui de l'article car on voit pas vraiment l'avantage concurrentiel du TMoE par rapport au NMoE, ce serait
@@ -52,10 +53,12 @@ Questions sur l'article:
 the hierarchical MoE framework'.
 - (Margot) Page 8, je ne comprends pas bien le choix de la distribution multinomiale pour Zi|ri et qu'est-ce que ça donnerait pour un autre choix ? Idem 
 pour le choix de la fonction multinomiale logistique pour les gates probabilities.
-- (Margot) Je n'ai pas compris le paragraphe 3.3 Identifiability of the TMoE model (page 8-9).
-- (Margot) Page 11, je ne comprends pas en quoi IRLS est différent d'un algorithme de Newton classique ici ?
+- (Margot) Je n'ai pas compris le paragraphe 3.3 Identifiability of the TMoE model (page 8-9). (Victoria) Je crois qu'ils voulaient dire que chaque combinaison de paramètres trouvée donne une densité unique (ie deux combinaisons différentes de paramètres ne peuvent pas donner la même densité finale pour le MoE)
+- (Margot) Page 11, je ne comprends pas en quoi IRLS est différent d'un algorithme de Newton classique ici ? (Victoria) Je me suis posé la meme question.
 - (Margot) Page 12, dérivation de la formule (31) à vérifier.
+- (Victoria) Est ce qu'on a besoin de redémontrer les calculs faits dans l'EM? (page 12)
+- (Victoria) Est ce que c'est le fait d'estimer nu en fonction de theta(m+1) qui rend le modèle robuste aux outliers? (page 13)
 - (Margot) Page 16, les valeurs des paramètres dans la Table 2 ont été apprises sur des données générées par quel modèle ?
 - (Margot) Page 20, sur l'absence de "confidence region" je n'ai pas compris de quoi il s'agissait.
 - (Margot) Page 27, quelle est la réalité météorologique de ce qu'ils appellent les "temperature anomalies" ?
-- (Margot) Est-ce qu'on fait le ppt en français ou en anglais ? 
+- (Margot) Est-ce qu'on fait le ppt en français ou en anglais ? En anglais je pense, et on pourra probablement parler en francais
