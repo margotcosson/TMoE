@@ -36,7 +36,6 @@ Introduction - 45 sec
 I/ Fondements théoriques - 2 min
 A/ TMoE: définition, formule, Insister sur la différence entre MoE et simple mixture (basé sur 2 observations x et r)?
 B/ EM Algorithm: rappels (mettre pseudo-code ?), présentation des formules, sketch de convergence, ECM
-C/ Hyper-paramètres et hypothèses: choix du nombre d'experts, initialisation, quoi d'autre ?
 
 II/ Critique de l'article - 3 min
 (A COMPLETER - Plan provisoire, sous-parties thématiques à venir quand ce sera plus clair)
@@ -44,6 +43,7 @@ A/ Points positifs
 - Identifiability (Je crois qu'ils voulaient dire que chaque combinaison de paramètres trouvée donne une densité unique 
 (ie deux combinaisons différentes de paramètres ne peuvent pas donner la même densité finale pour le MoE))
 - Random initialization in the examples
+- on peut utiliser AIC, BIC etc. pour déterminer le nb d'experts
 B/ Points négatifs
 - Laplace obtient à peu près les mêmes résultats (il est même meilleur dans certains cas)
 - Les cas test sont incomplets:
