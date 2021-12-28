@@ -31,7 +31,7 @@ Introduction:
 - Qu'est-ce qu'un MoE ? 
 - Visualisation d'un cas qui motive la nécessité de cet outil
 - Rappel bref du NMoE
-- Application du NMoE sur ce cas => échec (visualisation)
+- Application du NMoE sur ce cas => échec (visualisation) || Application sur un cas jouet
 - Explication : présence d'anomalies et données issues de distribution à queue lourde
 - Problématique: Quel MoE pour des données comportant des anomalies ou issues de distributions à queue lourde ?
 - Annonce de plan: On présentera d'abord la solution théorique apportée par le professeur Chamroukhi puis nous illustrerons son application sur un exemple
@@ -41,9 +41,12 @@ I/ Fondements théoriques
 A/ TMoE: définition, formule, Insister sur la différence entre MoE et simple mixture (basé sur 2 observations x et r)?
 B/ EM Algorithm: rappels (mettre pseudo-code ?), présentation des formules, sketch de convergence, ECM
 C/ Hyper-paramètres et hypothèses: choix du nombre d'experts, initialisation, quoi d'autre ?
-D/ (peut-etre inutile) Application sur un cas jouet (code)?
 
-II/ Exemple: application du TMoE sur les données du changement climatique
+II/ Critique de l'article
+A/ Points positifs
+B/ Points négatifs
+
+III/ Exemple: application du TMoE sur les données du changement climatique
 (Je pense qu'il faut prendre un autre exemple que celui de l'article car on voit pas vraiment l'avantage concurrentiel du TMoE par rapport au NMoE, ce serait
 peut-être pas mal de prendre un exemple de clustering aussi comme ça on étend le scope des exemples de l'article qui lui reste sur de la régression)
 A/ Présentation des données et pourquoi elles pourraient être mieux fittées par TMoE que NMoE
