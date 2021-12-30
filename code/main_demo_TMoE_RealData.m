@@ -41,9 +41,10 @@ clc;
 
 set(0,'defaultaxesfontsize',14);
 %%  chose a real data and some model structure
-data_set = 'Tone'; K = 2; p = 1; q = 1;
-data_set = 'TemperatureAnomaly'; K = 2; p = 1; q = 1;
+% data_set = 'Tone'; K = 2; p = 1; q = 1;
+data_set = 'TemperatureAnomaly'; K = 3; p = 1; q = 1;
 % data_set = 'motorcycle'; K = 4; p = 2; q = 1;
+% data_set = 'MonthlyTemperatureAnomaly'; K = 3; p = 1; q = 1;
 
 %% EM options
 nbr_EM_tries = 2;
@@ -68,6 +69,10 @@ switch data_set
         load 'data/motorcycle.mat';
         x=motorcycle.x;
         y=motorcycle.y;
+    case 'MonthlyTemperatureAnomaly'
+        data = csvread('data/MonthlyTemperatureAnomaly.csv');
+        x = data(:, 1);
+        y = data(:, 2);
     otherwise
         data = xlsread('data/Tone.xlsx');
         x = data(:,1);
