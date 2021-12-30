@@ -183,7 +183,10 @@ else %eg. for real data with unknown classes etc
     xlabel('EM iteration number');
     ylabel('Observed data log-likelihood');
     legend('NMoE log-likelihood');
+    savefig('C:\Users\Victoria\Documents\Victoria\enpc\3A\MVA\COMPUTATIONAL_STATS\tMoE_m\10_outliers_NMoE_loglik.fig');
     legend('boxoff')
     box on;
+    savefig('C:\Users\Victoria\Documents\Victoria\enpc\3A\MVA\COMPUTATIONAL_STATS\tMoE_m\10_outliers_NMoE_loglik.fig');
+    
 end
 end

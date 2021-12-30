@@ -61,7 +61,8 @@ if WithOutliers
     outilers = -1.5 + 2*rand(No,1);
     tmp = randperm(length(y));
     Indout = tmp(1:No);
-    y(Indout) = -5; %outilers;
+    % y(Indout) = -5 ; %outilers;
+    y(Indout) = -5 + 2*rand(No,1);
 end
 
 %% model learning

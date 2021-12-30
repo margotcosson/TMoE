@@ -176,6 +176,7 @@ else %eg. for real data with unknown classes etc
     xlabel('EM iteration number');
     ylabel('Observed data log-likelihood');
     legend('TMoE log-likelihood');
+    savefig('10_outliers_TMoE_loglik.fig')
     legend('boxoff')
     box on;
 end
