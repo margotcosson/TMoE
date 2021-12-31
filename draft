@@ -54,11 +54,13 @@ B/ Points négatifs
     - aucune précision sur l'utilisation de ECM vs EM dans les cas d'usage, isoler le bénéfice de la forme de la distribution t vs le bénéfice induit par l'ECM
 
 III/ Exemple: application du TMoE - 2 min
-(Je pense qu'il faut prendre un autre exemple que celui de l'article car on voit pas vraiment l'avantage concurrentiel du TMoE par rapport au NMoE, ce serait
-peut-être pas mal de prendre un exemple de clustering aussi comme ça on étend le scope des exemples de l'article qui lui reste sur de la régression)
-A/ Présentation des données et pourquoi elles pourraient être mieux fittées par TMoE que NMoE
-B/ Résultats du TMoE
-C/ Comparaison avec le NMoE
+A/ Tests sur les données générées 
+- % d'anomalies plus élevés (avec même schéma que lui)
+- anomalies random
+B/ Tests sur les données climatiques
+- 3 clusters sur ses données, lien avec le rapport du GIEC
+- sur données mensuelles plus variables de 1880 à auj 
+- seulement sur les dernières années avec données ≠ avec covid ? rejet de CO2
 
 Conclusion - 30 sec
 - Meilleur que NMoE sur les données avec des anomalies ou issues de distribution à queue lourde
