@@ -45,6 +45,7 @@ A/ Points positifs
 - Random initialization in the examples
 - on peut utiliser AIC, BIC etc. pour déterminer le nb d'experts
 B/ Points négatifs
+- problemes plot code couleur
 - Laplace obtient à peu près les mêmes résultats (il est même meilleur dans certains cas)
 - Les cas test sont incomplets:
     - (*) essayer cas test 2 avec > 5% d'outliers
