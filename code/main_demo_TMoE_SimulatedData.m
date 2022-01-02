@@ -44,7 +44,7 @@ Betak = [0 0;
     -2.5 2.5];
 Sigmak = [.5, .5];%the standard deviations
 Lambdak = [3, 5];
-Nuk = [5, 7];
+Nuk = [inf, inf];
 
 % sample the data
 x = linspace(-1, 1, n);
@@ -79,14 +79,18 @@ verbose_EM = 1;
 verbose_NR = 0;
 
 %% learn the model from the sampled data
-TMoE =  learn_TMoE_EM(y, x, K, p, q, nb_EM_runs, max_iter_EM, threshold, verbose_EM, verbose_NR);
-disp('- TMoE fit completed --')
+%TMoE_ECM =  learn_TMoE_EM(y, x, K, p, q, nb_EM_runs, max_iter_EM, threshold, verbose_EM, verbose_NR, 1);
+disp('- TMoE with ECM fit completed --')
+disp(' ')
+%TMoE_EM =  learn_TMoE_EM(y, x, K, p, q, nb_EM_runs, max_iter_EM, threshold, verbose_EM, verbose_NR, 0);
+disp('- TMoE with EM fit completed --')
 disp(' ')
 NMoE =  learn_univ_NMoE_EM(y, x, K, p, q, nb_EM_runs, max_iter_EM, threshold, verbose_EM, verbose_NR);
 
 disp('- fit completed --')
 %% plot of the results
-show_TMoE_results(x, y, TMoE, klas, stats)
+%show_TMoE_results(x, y, TMoE_ECM, klas, stats)
+%show_TMoE_results(x, y, TMoE_EM, klas, stats)
 show_NMoE_results(x, y, NMoE, klas, stats)
 
 % Note that as it uses the t distribution, so the mean and the variance might be not defined (if Nu <1 and or <2), and hence the

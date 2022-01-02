@@ -1,4 +1,4 @@
-function solution = learn_TMoE_EM(Y, x, K, p, q, total_EM_tries, max_iter_EM, threshold, verbose_EM, verbose_IRLS)
+function solution = learn_TMoE_EM(Y, x, K, p, q, total_EM_tries, max_iter_EM, threshold, verbose_EM, verbose_IRLS, use_ECM)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %learn_univ_TMoE_EM: fits a TMoE with a conditional EM algorithm
 %
@@ -34,13 +34,17 @@ function solution = learn_TMoE_EM(Y, x, K, p, q, total_EM_tries, max_iter_EM, th
 
 warning off
 
-
 if nargin<10 verbose_IRLS = 0; end
 if nargin<9  verbose_IRLS =0; verbose_EM = 0; end;
 if nargin<8  verbose_IRLS =0; verbose_EM = 0;   threshold = 1e-6; end;
 if nargin<7  verbose_IRLS =0; verbose_EM = 0;   threshold = 1e-6; max_iter_EM = 1000; end;
-if nargin<6  verbose_IRLS =0; verbose_EM = 0;   threshold = 1e-6; max_iter_EM = 1000; total_EM_tries=1;end;
-
+if nargin<6  verbose_IRLS =0; verbose_EM = 0;   threshold = 1e-6; max_iter_EM = 1000; total_EM_tries=1; end;
+if nargin<5  verbose_IRLS =0; verbose_EM = 0;   threshold = 1e-6; max_iter_EM = 1000; total_EM_tries=1; use_ECM = 1; end;
+if use_ECM == 1
+    disp("Uses ECM")
+else
+    disp("Uses EM")
+end
 if size(Y,2)==1, Y=Y'; end % cas d'une courbe
 
 [n, m] = size(Y); % n curves, each curve is composed of m observations
@@ -132,11 +136,13 @@ while EM_try <= total_EM_tries
             Sigma2k(k)= sum(Tauik(:,k).*Wik(:,k).*((y-XBeta*betak).^2))/sum(Tauik(:,k));
             
             %% if ECM (use an additional E-Step with the updatated betak and sigma2k
-            dik = (y - XBeta*Betak(:,k))/sqrt(Sigma2k(k));
-            %nuk = Nuk(k);
-            % E[Wi|yi,zik=1]
-            Wik(:,k) = (Nuk(k) + 1)./(Nuk(k) + dik.^2);
-            
+            if use_ECM == 1
+                dik = (y - XBeta*Betak(:,k))/sqrt(Sigma2k(k)); % ici
+                %nuk = Nuk(k);
+                % E[Wi|yi,zik=1]
+                Wik(:,k) = (Nuk(k) + 1)./(Nuk(k) + dik.^2); % ici
+            end
+
             % update the nuk (the robustness parameter)
             nu0 = Nuk(k);
             try

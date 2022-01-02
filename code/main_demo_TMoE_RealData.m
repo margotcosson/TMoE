@@ -42,9 +42,9 @@ clc;
 set(0,'defaultaxesfontsize',14);
 %%  chose a real data and some model structure
 % data_set = 'Tone'; K = 2; p = 1; q = 1;
-data_set = 'TemperatureAnomaly'; K = 3; p = 1; q = 1;
+% data_set = 'TemperatureAnomaly'; K = 3; p = 1; q = 1;
 % data_set = 'motorcycle'; K = 4; p = 2; q = 1;
-% data_set = 'MonthlyTemperatureAnomaly'; K = 3; p = 1; q = 1;
+data_set = 'MonthlyTemperatureAnomaly'; K = 3; p = 1; q = 1;
 
 %% EM options
 nbr_EM_tries = 2;
