@@ -42,16 +42,17 @@ clc;
 set(0,'defaultaxesfontsize',14);
 %%  chose a real data and some model structure
 % data_set = 'Tone'; K = 2; p = 1; q = 1;
-% data_set = 'TemperatureAnomaly'; K = 3; p = 1; q = 1;
+%data_set = 'TemperatureAnomaly'; K = 3; p = 1; q = 1;
 % data_set = 'motorcycle'; K = 4; p = 2; q = 1;
-data_set = 'MonthlyTemperatureAnomaly'; K = 3; p = 1; q = 1;
+data_set = 'MonthlyTemperatureAnomaly'; K = 6; p = 1; q = 1;
 
 %% EM options
-nbr_EM_tries = 2;
+nbr_EM_tries = 10;
 max_iter_EM = 1500;
 threshold = 1e-6;
-verbose_EM = 1;
+verbose_EM = 0;
 verbose_IRLS = 0;
+modif_xaxis = 0;
 
 switch data_set
     %% Tone data set
@@ -73,28 +74,37 @@ switch data_set
         data = csvread('data/MonthlyTemperatureAnomaly.csv');
         x = data(:, 1);
         y = data(:, 2);
+        modif_xaxis = 1;
     otherwise
         data = xlsread('data/Tone.xlsx');
         x = data(:,1);
         y = data(:,2);
 end
 figure,
-plot(x, y, 'ko')
+if modif_xaxis == 1
+    plot(1880 + floor(abs(x/12)), y, 'ko');
+else
+    plot(x, y, 'ko');
+end
 xlabel('x')
 ylabel('y')
 title([data_set,' data set'])
 
 %% learn the model from the  data
 
-TMoE =  learn_TMoE_EM(y, x, K, p, q, nbr_EM_tries, max_iter_EM, threshold, verbose_EM, verbose_IRLS);
+%TMoE =  learn_TMoE_EM(y, x, K, p, q, nbr_EM_tries, max_iter_EM, threshold, verbose_EM, verbose_IRLS, 1);
 disp('- TMoE fit completed --')
 disp(' ')
-NMoE =  learn_univ_NMoE_EM(y, x, K, p, q, nbr_EM_tries, max_iter_EM, threshold, verbose_EM, verbose_IRLS);
+%NMoE =  learn_univ_NMoE_EM(y, x, K, p, q, nbr_EM_tries, max_iter_EM, threshold, verbose_EM, verbose_IRLS);
 
 disp('- NMoE fit completed --')
 
-show_TMoE_results(x, y, TMoE)
-show_NMoE_results(x, y, NMoE)
+if modif_xaxis == 1
+    x = 1880 + floor(abs(x/12));
+end
+
+%show_TMoE_results(x, y, TMoE);
+%show_NMoE_results(x, y, NMoE);
 % Note that as it uses the t distribution, so the mean and the variance might be not defined (if Nu <1 and or <2), and hence the
 % mean functions and confidence regions might be not displayed..
 
