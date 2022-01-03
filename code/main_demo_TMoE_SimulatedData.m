@@ -53,6 +53,7 @@ x = linspace(-1, 1, n);
 
 %% add (or no) outliers
 WithOutliers = 1; % to generate a sample with outliers
+hide_data = 0;
 x_out_low = 0;
 x_out_up = 0;
 y_out_low = 0;
@@ -61,15 +62,16 @@ y_out_up = 0;
 % if outliers
 if WithOutliers
     disp('- THERE ARE OUTLIERS --')
-    rate = 0.20;%amount of outliers in the data
+    rate = 0.0;%amount of outliers in the data
     upperrate = rate / 2;
     lowerrate = rate / 2;
     Noupper = round(length(y)*upperrate);
     upperoutilers = -1.5 + 2*rand(Noupper,1);
     uptmp = randperm(length(y));
     Indoutupper = uptmp(1:Noupper);
-    % y(Indout) = -5 ; %outilers;
-    y(Indoutupper) = normrnd(3, 2, [1, Noupper]);
+    y(Indoutupper) = -5 ; %outilers;
+    % y(Indoutupper) = normrnd(3, 2, [1, Noupper]);
+    % y(Indoutupper) =-5 + 10 *rand(Noupper,1);
     Nolower = round(length(y)*lowerrate);
     outilers = -1.5 + 2*rand(Nolower,1);
     disp('     Outliers');
@@ -78,14 +80,32 @@ if WithOutliers
     %disp(rand(Nolower,1));
     lowtmp = randperm(length(y));
     Indoutlower = lowtmp(1:Nolower);
-    % y(Indout) = -5 ; %outilers;
-    % y(Indoutlower) = -5 + 2*rand(Nolower,1);
-    y(Indoutlower) = normrnd(-2, 2, [1, Nolower]);
+    y(Indoutlower) = -5 ; %outilers;
+    %y(Indoutlower) = -5 + 10 *rand(Nolower,1);
+    % y(Indoutlower) = normrnd(-2, 2, [1, Nolower]);
     x_out_low = Indoutlower;
     x_out_up = Indoutupper;
     y_out_low =  y(Indoutlower);
     y_out_up =  y(Indoutupper);
+%end
+
+elseif hide_data
+    rate = 0;
+    old_x = x;
+    old_y = y;
+    missing_interval = -1 + rand(2, 1)*2;
+    missing_interval = sort(missing_interval);
+    while  missing_interval(2) - missing_interval(1)>0.8 | 0.3>missing_interval(2) - missing_interval(1)
+        missing_interval = -1 + rand(2, 1)*2;
+        missing_interval = sort(missing_interval);
+    end
+    disp('-- Missing interval--');
+    disp(missing_interval);
+     y = y(find(x>missing_interval(2) | missing_interval(1)>x));
+    x = x(x>missing_interval(2) | missing_interval(1)>x);
+    %disp(find(x>missing_interval(2) | missing_interval(1)>x));
 end
+
 
 %% model learning
 % model structure setting
@@ -94,7 +114,7 @@ p = 1; % degree the polynomial regressors (Experts Net)
 q = 1; % degree of the logstic regression (gating Net)
 
 % EM options setting
-nb_EM_runs = 2;
+nb_EM_runs = 20;
 max_iter_EM = 1500;
 threshold = 1e-6;
 verbose_EM = 0; % instead of 1
@@ -102,10 +122,10 @@ verbose_NR = 0;
 verbose_single_fig = 1;
 
 %% learn the model from the sampled data
-%TMoE_ECM =  learn_TMoE_EM(y, x, K, p, q, nb_EM_runs, max_iter_EM, threshold, verbose_EM, verbose_NR, 1);
+TMoE_ECM =  learn_TMoE_EM(y, x, K, p, q, nb_EM_runs, max_iter_EM, threshold, verbose_EM, verbose_NR, 1);
 disp('- TMoE with ECM fit completed --')
 disp(' ')
-%TMoE_EM =  learn_TMoE_EM(y, x, K, p, q, nb_EM_runs, max_iter_EM, threshold, verbose_EM, verbose_NR, 0);
+TMoE_EM =  learn_TMoE_EM(y, x, K, p, q, nb_EM_runs, max_iter_EM, threshold, verbose_EM, verbose_NR, 0);
 disp('- TMoE with EM fit completed --')
 disp(' ')
 NMoE =  learn_univ_NMoE_EM(y, x, K, p, q, nb_EM_runs, max_iter_EM, threshold, verbose_EM, verbose_NR);
@@ -117,11 +137,12 @@ if ~exist(newSubFolder, 'dir')
   mkdir(newSubFolder);
 end
 %% plot of the results
+show_computation_time(TMoE_ECM, TMoE_EM, NMoE)
 
 %show_TMoE_results(x, y, TMoE_ECM, klas, stats)
 %show_TMoE_results(x, y, TMoE_EM, klas, stats)
 %show_NMoE_results(x, y, NMoE, klas, stats)
-show_TMoE_results_simulated(x, y, TMoE, klas, stats, newSubFolder, x_out_low, x_out_up, y_out_low, y_out_up, verbose_single_fig)
+show_TMoE_results_simulated(x, y, TMoE_ECM, klas, stats, newSubFolder, x_out_low, x_out_up, y_out_low, y_out_up, verbose_single_fig)
 show_NMoE_results_simulated(x, y, NMoE, klas, stats, newSubFolder, x_out_low, x_out_up, y_out_low, y_out_up, verbose_single_fig)
 
 % Note that as it uses the t distribution, so the mean and the variance might be not defined (if Nu <1 and or <2), and hence the
