@@ -45,14 +45,16 @@ Betak = [0 0;
 Sigmak = [.5, .5];%the standard deviations
 Lambdak = [3, 5];
 % Nuk = [5, 7];
-Nuk = [inf, inf];
+% Nuk = [inf, inf];
+Nuk = [1, 3];
 
 % sample the data
 x = linspace(-1, 1, n);
 [y, klas, stats, Z] = sample_univ_TMoE(Alphak, Betak, Sigmak, Nuk, x);
 
 %% add (or no) outliers
-WithOutliers = 1; % to generate a sample with outliers
+WithOutliers = 0; % to generate a sample with outliers
+rate = 0.0;
 x_out_low = 0;
 x_out_up = 0;
 y_out_low = 0;
@@ -102,7 +104,7 @@ verbose_NR = 0;
 verbose_single_fig = 1;
 
 %% learn the model from the sampled data
-%TMoE_ECM =  learn_TMoE_EM(y, x, K, p, q, nb_EM_runs, max_iter_EM, threshold, verbose_EM, verbose_NR, 1);
+TMoE_ECM =  learn_TMoE_EM(y, x, K, p, q, nb_EM_runs, max_iter_EM, threshold, verbose_EM, verbose_NR, 1);
 disp('- TMoE with ECM fit completed --')
 disp(' ')
 %TMoE_EM =  learn_TMoE_EM(y, x, K, p, q, nb_EM_runs, max_iter_EM, threshold, verbose_EM, verbose_NR, 0);
@@ -121,7 +123,7 @@ end
 %show_TMoE_results(x, y, TMoE_ECM, klas, stats)
 %show_TMoE_results(x, y, TMoE_EM, klas, stats)
 %show_NMoE_results(x, y, NMoE, klas, stats)
-show_TMoE_results_simulated(x, y, TMoE, klas, stats, newSubFolder, x_out_low, x_out_up, y_out_low, y_out_up, verbose_single_fig)
+show_TMoE_results_simulated(x, y, TMoE_ECM, klas, stats, newSubFolder, x_out_low, x_out_up, y_out_low, y_out_up, verbose_single_fig)
 show_NMoE_results_simulated(x, y, NMoE, klas, stats, newSubFolder, x_out_low, x_out_up, y_out_low, y_out_up, verbose_single_fig)
 
 % Note that as it uses the t distribution, so the mean and the variance might be not defined (if Nu <1 and or <2), and hence the
